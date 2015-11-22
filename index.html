@@ -8,8 +8,9 @@
 </head>
 
 <body align="left" marginwidth="0">
-<p marginwidth="0"></p>
-
+<div>
+	<p marginwidth="0"></p>
+</div>
 
 <script>
 
@@ -194,16 +195,26 @@
 
 		if (e.clientY > (3*window.innerHeight/4)){
 
-			console.log("gets here");
 			scrollDown = true;
+			scrollUp = false;
 		}
-		else{
-			// console.log("gets here");
+		else if (e.clientY < (window.innerHeight/4)){
+			
 			scrollDown = false;
+			scrollUp = true;
+		}
+
+		else{
+			scrollDown = false;
+			scrollUp = false;
 		}
 
 		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
 			scrollDown = false;
+		}
+
+		if ((window.scrollY ==0)){
+			scrollUp = false;
 		}
 	}
 
