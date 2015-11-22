@@ -173,6 +173,7 @@
 	var scrollDown = false;
 	var scrollUp = false;
 
+// <<<<<<< HEAD
 	// window.setInterval(function(){
 
 	// 	if(scrollDown){
@@ -216,6 +217,41 @@
 		}
 	}
 
+// <<<<<<< HEAD
+	window.setInterval(function(){
+
+		if(scrollDown){
+			container.scrollTop += 1;
+		}
+		else if (scrollUp){
+			container.scrollTop -= 1;
+		}
+	}, 50);
+
+	container.onmousemove = function(e){
+
+		if (e.offsetY > (3*container.offsetHeight/4)){
+			scrollDown = true;
+			scrollUp = false;
+		}
+		else if (e.offsetY < container.offsetHeight/4){
+			scrollDown = false;
+			scrollUp = true;
+		}
+
+		else{
+			scrollDown = false;
+			scrollUp = false;
+		}
+
+		if ((container.offsetHeight + container.scrollTop) >= par1.offsetHeight){
+			scrollDown = false;
+		}
+
+		if (container.scrollTop == 0){
+			scrollUp = false;
+		}
+	}
 	// window.onmousemove = function(e){
 
 	// 	if (e.clientY > (3*window.innerHeight/4)){
