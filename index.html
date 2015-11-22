@@ -12,7 +12,7 @@
 <table>
 <tr>
 <td>
-	<h2>Please read our Terms of Service</h2>
+	<h2>Terms and Conditions</h2>
 </td>
 </tr>
 <tr>
@@ -27,7 +27,7 @@
 </td>
 </tr>
 </table>
-<input id="acceptButton" type=button onClick="location.href='accepted.html'" disabled="disabled" value='Accept'>
+<input id="acceptButton" type=button onClick="location.href='accepted.html'" disabled="disabled" value='Please read the terms and conditions'>
 
 <script source='jquery-2.1.4.min.js'> </script>
 <script>
@@ -211,8 +211,9 @@
 		}
 		if(container.scrollTop === container.scrollHeight - container.offsetHeight){
 			var b = document.getElementById("acceptButton");
-			b.style.background = "#A9A9A9";
+			b.style.background = "#418446";
 			b.disabled = false;
+			b.value = "Accept";
 		}
 	}
 
