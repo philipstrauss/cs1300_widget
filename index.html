@@ -229,16 +229,19 @@
 
 	container.onmousemove = function(e){
 
-		if (e.offsetY > (3*container.offsetHeight/4)){
+		var mouseY = e.offsetY-container.scrollTop;
+
+		if (mouseY > (3*container.offsetHeight/4)){
 			scrollDown = true;
 			scrollUp = false;
 		}
-		else if (e.offsetY < container.offsetHeight/4){
+		else if (mouseY < container.offsetHeight/4){
 			scrollDown = false;
 			scrollUp = true;
 		}
 
 		else{
+			console.log("gets here");
 			scrollDown = false;
 			scrollUp = false;
 		}
