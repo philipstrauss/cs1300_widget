@@ -13,31 +13,29 @@ p {
 span{
     margin-width: 0px;
 }
-button {
-    background: #009933;
+input {
+    background: #A9A9A9;
     border: 0;
     box-shadow: 0px 5px 0px darken(#f1c40f, 20%);
     padding: 20px;
-    width: 100px;
+    width: 250px;
     height: 20px;
     outline: none;
     border-radius: 3px;
     color: darken(#8e44ad, 10%);
     font-weight: bold;
+    margin-left: 3px;
+    font-size: 14px;
 }
-#my-div
-{
-    width    : 400px;
-    height   : 200px;
-    overflow : hidden;
-    position : relative;
+
+a:link{
+    color: #000000; 
+    text-decoration: none
 }
+
  
-#my-iframe
+iframe
 {
-    position : absolute;
-    top      : -100px;
-    left     : -100px;
-    width    : 1280px;
-    height   : 1200px;
+    border:solid;
+    border-color: red;
 }
