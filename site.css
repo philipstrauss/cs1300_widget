@@ -2,13 +2,40 @@ body{
 
 	font-family: Arial, Verdana, sans-serif;
 	font-size: 16px;
-	/*background-size: 80px 40px;*/
-    /*color: ;*/
+	background-size: 80px 40px;
+    color: ;
     padding: 3px;
 }
 p {
-    margin-top: 25px;
-    margin-bottom: 25px;
-    margin-right: 150px;
-    margin-left: 80px;
+    margin-left: 0px;
+
+}
+span{
+    margin-width: 0px;
+}
+input {
+    background: #A9A9A9;
+    border: 0;
+    box-shadow: 0px 5px 0px darken(#f1c40f, 20%);
+    padding: 20px;
+    width: 250px;
+    height: 20px;
+    outline: none;
+    border-radius: 3px;
+    color: darken(#8e44ad, 10%);
+    font-weight: bold;
+    margin-left: 3px;
+    font-size: 14px;
+}
+
+a:link{
+    color: #000000; 
+    text-decoration: none
+}
+
+ 
+iframe
+{
+    border:solid;
+    border-color: red;
 }
