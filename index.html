@@ -9,9 +9,26 @@
 
 <body align="left" marginwidth="0">
 
+<table>
+<tr>
+<td>
+	<h2>Please read our Terms of Service</h2>
+</td>
+</tr>
+<tr>
+<td>
 <div class="container">
 	<p marginwidth="0"></p>
 </div>
+</td>
+</tr>
+<tr>
+</td>
+</td>
+</tr>
+</table>
+<input id="acceptButton" type=button onClick="location.href='accepted.html'" disabled="disabled" value='Accept'>
+
 <script source='jquery-2.1.4.min.js'> </script>
 <script>
 
@@ -156,6 +173,18 @@
 	var scrollDown = false;
 	var scrollUp = false;
 
+// <<<<<<< HEAD
+	// window.setInterval(function(){
+
+	// 	if(scrollDown){
+	// 		window.scrollBy(0,1);
+	// 	}
+	// 	else if (scrollUp){
+	// 		window.scrollBy(0,-1);
+	// 	}
+
+	// }, 50);
+
 	container.onscroll = function(e){
 
 		if (container.scrollTop > init_pos){
@@ -180,8 +209,14 @@
 				adjust(cur);
 			}
 		}
+		if(container.scrollTop === container.scrollHeight - container.offsetHeight){
+			var b = document.getElementById("acceptButton");
+			b.style.background = "#A9A9A9";
+			b.disabled = false;
+		}
 	}
 
+// <<<<<<< HEAD
 	window.setInterval(function(){
 
 		if(scrollDown){
@@ -194,12 +229,11 @@
 
 	container.onmousemove = function(e){
 
-		if (e.clientY > (3*container.clientHeight/4)){
+		if (e.offsetY > (3*container.offsetHeight/4)){
 			scrollDown = true;
 			scrollUp = false;
 		}
-		else if (e.clientY < container.clientHeight/4){
-	
+		else if (e.offsetY < container.offsetHeight/4){
 			scrollDown = false;
 			scrollUp = true;
 		}
@@ -209,7 +243,7 @@
 			scrollUp = false;
 		}
 
-		if ((container.clientHeight + container.scrollTop) >= par1.offsetHeight){
+		if ((container.offsetHeight + container.scrollTop) >= par1.offsetHeight){
 			scrollDown = false;
 		}
 
@@ -217,6 +251,22 @@
 			scrollUp = false;
 		}
 	}
+	// window.onmousemove = function(e){
+
+	// 	if (e.clientY > (3*window.innerHeight/4)){
+
+	// 		console.log("gets here");
+	// 		scrollDown = true;
+	// 	}
+	// 	else{
+	// 		// console.log("gets here");
+	// 		scrollDown = false;
+	// 	}
+
+	// 	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+	// 		scrollDown = false;
+	// 	}
+	// }
 
 	// window.onkeydown = function(e) {
 
