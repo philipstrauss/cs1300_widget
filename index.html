@@ -150,8 +150,19 @@
 	adjust(0);
 	var init_Y = spans[0].offsetTop;
 	var init_pos = window.scrollY;
+	var scrollDown = false;
+	var scrollUp = false;
 
-	console.log(spans[0].offsetTop);
+	window.setInterval(function(){
+
+		if(scrollDown){
+			window.scrollBy(0,1);
+		}
+		else if (scrollUp){
+			window.scrollBy(0,-1);
+		}
+
+	}, 50);
 
 	window.onscroll = function(e){
 
@@ -160,8 +171,9 @@
 			var diff = window.scrollY-init_pos;
 			// console.log(diff);
 			if (spans[cur].offsetTop < init_Y+diff){
+
 				adjustBack(cur);
-				cur++;
+				if (cur < spans_length-1) cur++;
 				adjust(cur);
 			}
 		}
@@ -172,12 +184,28 @@
 
 			if (spans[cur].offsetTop > init_Y-diff){
 				adjustBack(cur);
-				cur--;
+				if (cur > 0) cur--;
 				adjust(cur);
 			}
 		}
 	}
 
+	window.onmousemove = function(e){
+
+		if (e.clientY > (3*window.innerHeight/4)){
+
+			console.log("gets here");
+			scrollDown = true;
+		}
+		else{
+			// console.log("gets here");
+			scrollDown = false;
+		}
+
+		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+			scrollDown = false;
+		}
+	}
 
 	// window.onkeydown = function(e) {
 
