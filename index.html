@@ -77,6 +77,51 @@
 		}
 	}
 
+	function adjustBack(i){
+
+		if (CHANGE_SIZE){
+
+			for (j = i; j >= 0; j--){
+				if (spans[j].style.fontSize == DEFAULT_SIZE.toString()+"px"){
+					break;
+				}
+				spans[j].style.fontSize = DEFAULT_SIZE.toString()+"px";
+			}
+			for (k = i+1; k < spans_length; k++){
+				if (spans[k].style.fontSize == DEFAULT_SIZE.toString()+"px"){
+					break;
+				}
+				spans[k].style.fontSize = DEFAULT_SIZE.toString()+"px";
+			}
+		}
+
+		if (CHANGE_SPACING){
+
+			for (j = i; j >= 0; j--){
+				if (spans[j].style.lineHeight == "100%"){
+					break;
+				}
+				spans[j].style.lineHeight = "100%";
+			}
+			for (k = i+1; k < spans_length; k++){
+				if (spans[k].style.lineHeight == "100%"){
+					break;
+				}
+				spans[k].style.lineHeight = "100%";
+			}
+		}
+	}
+
+	function setupMouseOver(el, i){
+		el.onmouseover = function(){
+			adjustBack(cur);
+			adjust(i);
+			cur = i;
+			init_pos = window.scrollY;
+			init_Y = spans[cur].offsetTop;
+		}
+	}
+
 	var to_insert = "";
 	var split_text = text.split(" ");
 	for (i = 0; i < split_text.length; i++){
@@ -98,84 +143,124 @@
 	par1.style.fontSize = DEFAULT_SIZE.toString()+'px';
 	var spans = document.getElementsByTagName("span");
 	var spans_length = spans.length;
-	var default_drop = spans[0].getBoundingClientRect().top;
 
-	var cur = 0;
-	adjust(0);
+	for(i = 0; i < spans_length; i++){
 
-
-	window.onkeydown = function(e) {
-
-	    var key = e.keyCode ? e.keyCode : e.which;
-
-	    e.preventDefault();
-	    if (key == 38) {
-
-	    	moveUp();   
-	    }
-
-	    else if (key == 40) {
-
-	    	moveDown();
-	    }		    
+		setupMouseOver(spans[i], i);
 	}
 
-	window.onscroll = function(e) {
-		
-		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-    
-    		return;
-    	}
+	var cur = 0; 
+	adjust(0);
+	var init_Y = spans[0].offsetTop;
+	var init_pos = window.scrollY;
 
-		while (spans[cur].getBoundingClientRect().top < default_drop)	{
+	console.log(spans[0].offsetTop);
 
-			if (cur+1 == spans_length){
-	    		return;
-	    	}
-	    	cur++;
-	    	adjust(cur);		
-	    }
+	window.onscroll = function(e){
 
-		while (spans[cur].getBoundingClientRect().top > default_drop)	{
-			
-			if (cur == 0){
-	        	return;
-	        }
-	        cur--;
-	        adjust(cur);
+		if (window.scrollY > init_pos){
+
+			var diff = window.scrollY-init_pos;
+			// console.log(diff);
+			if (spans[cur].offsetTop < init_Y+diff){
+				adjustBack(cur);
+				cur++;
+				adjust(cur);
+			}
 		}
 
+		else if (window.scrollY < init_pos){
+
+			var diff = init_pos - window.scrollY;
+
+			if (spans[cur].offsetTop > init_Y-diff){
+				adjustBack(cur);
+				cur--;
+				adjust(cur);
+			}
+		}
 	}
 
-	function moveUp() {
 
-		if (cur == 0){
-        	return;
-        }
-        cur--;
-        adjust(cur);
+	// window.onkeydown = function(e) {
+
+	//     var key = e.keyCode ? e.keyCode : e.which;
+
+	//     e.preventDefault();
+	//     if (key == 38) {
+
+	//     	moveUp();   
+	//     }
+
+	//     else if (key == 40) {
+
+	//     	moveDown();
+	//     }
+	//     else if (key == 39){
+
+	//     	adjustBack(cur);
+	//     }		    
+	// }
+
+
+
+
+	// window.onscroll = function(e) {
+		
+	// 	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    
+ //    		return;
+ //    	}
+
+	// 	while (spans[cur].getBoundingClientRect().top < default_drop)	{
+
+	// 		if (cur+1 == spans_length){
+	//     		return;
+	//     	}
+	//     	cur++;
+	//     	adjust(cur);		
+	//     }
+
+	// 	while (spans[cur].getBoundingClientRect().top > default_drop)	{
+			
+	// 		if (cur == 0){
+	//         	return;
+	//         }
+	//         cur--;
+	//         adjust(cur);
+	// 	}
+
+	// }
+
+	// function moveUp() {
+
+	// 	if (cur == 0){
+ //        	return;
+ //        }
+ //        cur--;
+ //        adjust(cur);
         
-        while (spans[cur].getBoundingClientRect().top < default_drop){
-        	window.scrollBy(0,-1);
-        } 
-	}
+ //        while (spans[cur].getBoundingClientRect().top < default_drop){
+ //        	window.scrollBy(0,-1);
+ //        } 
+	// }
 
-	function moveDown() {
+	// function moveDown() {
 
-		if (cur+1 == spans_length){
-    		return;
-    	}
-    	cur++;
-    	adjust(cur);
+	// 	if (cur+1 == spans_length){
+ //    		return;
+ //    	}
+ //    	cur++;
+ //    	adjust(cur);
 
-    	var prev_pos = 0;
-    	while (spans[cur].getBoundingClientRect().top > default_drop && spans[cur].getBoundingClientRect().top != prev_pos){
+ //    	var prev_pos = 0;
+ //    	while (spans[cur].getBoundingClientRect().top > default_drop && spans[cur].getBoundingClientRect().top != prev_pos){
     		
-    		prev_pos = spans[cur].getBoundingClientRect().top;
-        	window.scrollBy(0,1);
-        }
+ //    		prev_pos = spans[cur].getBoundingClientRect().top;
+ //        	window.scrollBy(0,1);
+ //        }
 
-	}
+	// }
 
 </script>
 
