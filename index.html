@@ -156,17 +156,6 @@
 	var scrollDown = false;
 	var scrollUp = false;
 
-	window.setInterval(function(){
-
-		if(scrollDown){
-			window.scrollBy(0,1);
-		}
-		else if (scrollUp){
-			window.scrollBy(0,-1);
-		}
-
-	}, 50);
-
 	container.onscroll = function(e){
 
 		if (container.scrollTop > init_pos){
@@ -193,20 +182,39 @@
 		}
 	}
 
-	window.onmousemove = function(e){
+	window.setInterval(function(){
 
-		if (e.clientY > (3*window.innerHeight/4)){
+		if(scrollDown){
+			container.scrollTop += 1;
+		}
+		else if (scrollUp){
+			container.scrollTop -= 1;
+		}
+	}, 50);
 
-			console.log("gets here");
+	container.onmousemove = function(e){
+
+		if (e.clientY > (3*container.clientHeight/4)){
 			scrollDown = true;
+			scrollUp = false;
 		}
+		else if (e.clientY < container.clientHeight/4){
+	
+			scrollDown = false;
+			scrollUp = true;
+		}
+
 		else{
-			// console.log("gets here");
+			scrollDown = false;
+			scrollUp = false;
+		}
+
+		if ((container.clientHeight + container.scrollTop) >= par1.offsetHeight){
 			scrollDown = false;
 		}
 
-		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
-			scrollDown = false;
+		if (container.scrollTop == 0){
+			scrollUp = false;
 		}
 	}
 
